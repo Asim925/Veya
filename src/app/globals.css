@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink-950: #05080f;
+  --color-ink-900: #0a101d;
+  --color-ink-850: #0d1526;
+  --color-ink-800: #111b31;
+  --color-ink-700: #1b2946;
+  --color-ink-600: #2b3d63;
+  --color-ink-500: #46597f;
+  --color-ink-300: #93a2bf;
+  --color-ink-200: #b9c3d6;
+
+  --color-paper: #f4f1ea;
+  --color-paper-2: #ece7dc;
+  --color-cream: #faf8f3;
+  --color-warm-white: #fdfcf9;
+
+  --color-accent: #4e7be8;
+  --color-accent-deep: #2f5cd0;
+  --color-accent-2: #85a7f4;
+  --color-accent-soft: #dfe7fa;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+
+  --shadow-soft: 0 24px 60px -28px rgb(5 8 15 / 0.28);
+  --shadow-card: 0 10px 30px -14px rgb(5 8 15 / 0.2);
+  --shadow-lift: 0 18px 44px -18px rgb(5 8 15 / 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "ss01", "cv05";
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 26px));
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- signature text outline (ghost words) ---------- */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(244 241 234 / 0.09);
+}
+.text-outline-light {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(5 8 15 / 0.08);
+}
+
+/* ---------- glass ---------- */
+.glass-dark {
+  background: rgb(255 255 255 / 0.045);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.glass-light {
+  background: rgb(255 255 255 / 0.65);
+  border: 1px solid rgb(5 8 15 / 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---------- marquee ---------- */
+@keyframes vey-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: vey-marquee 42s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- ken burns (hero images breathe) ---------- */
+@keyframes vey-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+.kenburns {
+  animation: vey-kenburns 16s ease-in-out infinite alternate;
+}
+
+/* ---------- floating chips ---------- */
+@keyframes vey-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+.floaty {
+  animation: vey-float 6.5s ease-in-out infinite;
+}
+.floaty-late {
+  animation: vey-float 7.5s ease-in-out 1.2s infinite;
+}
+
+/* ---------- rotating badge ---------- */
+@keyframes vey-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: vey-spin 22s linear infinite;
+}
+
+/* ---------- pulse dot ---------- */
+@keyframes vey-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.pulse-dot {
+  animation: vey-pulse 2.4s ease-in-out infinite;
+}
+
+/* ---------- line draw (connectors) ---------- */
+.line-draw {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+}
+.is-in .line-draw,
+.line-draw.is-in {
+  transform: scaleX(1);
+}
+
+/* ---------- misc ---------- */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+input[type="date"] {
+  color-scheme: dark;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track,
+  .kenburns,
+  .floaty,
+  .floaty-late,
+  .spin-slow,
+  .pulse-dot {
+    animation: none !important;
+  }
+  .line-draw {
+    transform: scaleX(1);
+    transition: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
