@@ -18,9 +18,9 @@ const instrument = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "VEYA — A new way to find and book places & services",
+  title: "VEYA — Venue + Way | Computer Science Case Study",
   description:
-    "VEYA (Venue + Way) brings venues, catering, sports and stays together on one platform. Discover spaces, services and experiences for every plan — all in one place.",
+    "VEYA (Venue + Way) is an informative Computer Science case study exploring the interfaces, APIs, databases, search and infrastructure behind a proposed booking marketplace.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -68,7 +68,7 @@ export default function Hero({ onSearch }: { onSearch: (s: HeroSearch) => void }
             <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-paper/15 bg-paper/5 px-4 py-1.5">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent-2" />
               <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-paper/60">
-                Business prototype · v1 preview
+                Computer Science case study · proposed system
               </span>
             </div>
           </Reveal>
@@ -76,20 +76,19 @@ export default function Hero({ onSearch }: { onSearch: (s: HeroSearch) => void }
           <Reveal delay={90}>
             <p className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent-2">
               <span aria-hidden className="h-px w-9 bg-accent-2/60" />
-              A new way to find and book places &amp; services
+              Venue + Way · an informative case study
             </p>
           </Reveal>
 
           <Reveal delay={160}>
             <h1 className="mt-5 text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] text-balance sm:text-[52px] xl:text-[62px]">
-              Discover spaces, services and experiences for every plan — all in <Italic>one place.</Italic>
+              A digital marketplace explained through <Italic>Computer Science.</Italic>
             </h1>
           </Reveal>
 
           <Reveal delay={240}>
             <p className="mt-6 max-w-lg text-[15.5px] leading-relaxed text-paper/60">
-              VEYA brings venues, catering, sports and stays together — compare, customize and book in a single
-              flow.
+              Explore how interfaces, APIs, databases, search, security and cloud infrastructure could work together in one proposed booking system.
             </p>
           </Reveal>
 
