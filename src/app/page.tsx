@@ -16,6 +16,7 @@ import ProviderForm from "@/sections/ProviderForm";
 import Finance from "@/sections/Finance";
 import Team from "@/sections/Team";
 import Closing from "@/sections/Closing";
+import CaseStudy from "@/sections/CaseStudy";
 
 const EMPTY_SEARCH: HeroSearch = { q: "", location: "", ts: 0 };
 
@@ -47,6 +48,7 @@ export default function Page() {
         <Campaign />
         <ProviderForm />
         <Finance />
+        <CaseStudy />
         <Team />
         <Closing />
       </main>

@@ -5,10 +5,12 @@ import { Logo, Menu, Close, ArrowUpRight } from "./icons";
 import { btnPrimary } from "./ui";
 
 const LINKS = [
-  { label: "Explore", href: "#events" },
-  { label: "Categories", href: "#categories" },
+  { label: "Overview", href: "#top" },
   { label: "How It Works", href: "#how" },
-  { label: "List Your Business", href: "#providers" },
+  { label: "CS Concepts", href: "#architecture" },
+  { label: "Categories", href: "#categories" },
+  { label: "Security", href: "#security" },
+  { label: "Future", href: "#future" },
 ];
 
 export default function Navbar() {
