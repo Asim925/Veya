@@ -11,10 +11,6 @@ import Events from "@/sections/Events";
 import Catering from "@/sections/Catering";
 import Sports from "@/sections/Sports";
 import Hospitality from "@/sections/Hospitality";
-import Campaign from "@/sections/Campaign";
-import ProviderForm from "@/sections/ProviderForm";
-import Finance from "@/sections/Finance";
-import Team from "@/sections/Team";
 import Closing from "@/sections/Closing";
 import CaseStudy from "@/sections/CaseStudy";
 
@@ -45,11 +41,7 @@ export default function Page() {
         <Catering />
         <Sports />
         <Hospitality />
-        <Campaign />
-        <ProviderForm />
-        <Finance />
         <CaseStudy />
-        <Team />
         <Closing />
       </main>
       <Footer />
