@@ -38,9 +38,33 @@ const concepts = [
 
 const future = ["Mobile application", "AI-based recommendations", "Smarter natural-language search", "Personalized results", "Provider verification", "Analytics", "Real-time notifications"];
 const security = ["Authentication", "Authorization", "Data protection", "Secure communication", "Input validation"];
+const workflowDetails = [
+  ["User", "A person searches for an event venue.", 'search("Karachi", "Large Event", 300 guests)'],
+  ["Frontend", "The interface collects input and sends a structured request.", "GET /api/listings?city=karachi&guests=300"],
+  ["API", "The communication layer validates the request and routes it.", "validate(query) → Search service"],
+  ["Backend", "Business logic applies filters and checks availability.", 'capacity >= 300 AND status = "available"'],
+  ["Database", "Organized tables return users, listings and bookings.", "SELECT * FROM listings WHERE location = 'Karachi'"],
+  ["Response", "Matching data returns through the API as JSON.", "200 OK → [{ id: 'A', name: 'Venue A' }]"],
+  ["Frontend", "The interface renders cards the user can compare.", "render(<ResultsGrid items={data} />)"],
+];
+const detailedTables = [
+  ["Users", "user_id · name · email · role", "U01 · Customer · user1@example.com · customer"],
+  ["Listings", "listing_id · provider_id · category · location · capacity", "L10 · U02 · large_event · Karachi · 350"],
+  ["Availability", "listing_id · date · time_slot · status", "L11 · Saturday · 19:00 · available"],
+  ["Services", "service_id · provider_id · type · price", "S01 · U02 · catering_standard · tier_2"],
+  ["Bookings", "booking_id · user_id · listing_id · date · status", "B100 · U01 · L10 · Saturday · confirmed"],
+];
+const recommendationSignals = ["Location", "Capacity", "Budget", "Previous searches"];
+const recommendationResults = [
+  ["Venue A", "0.90"],
+  ["Venue B", "0.72"],
+  ["Venue C", "0.58"],
+];
 
 export default function CaseStudy() {
   const [activeTable, setActiveTable] = useState(1);
+  const [activeWorkflow, setActiveWorkflow] = useState(0);
+  const [selectedSignals, setSelectedSignals] = useState(["Location", "Capacity"]);
 
   return (
     <section id="architecture" className="scroll-mt-20 bg-paper py-20 md:py-28">
@@ -62,6 +86,10 @@ export default function CaseStudy() {
         <div className="mt-16"><Reveal><div className="flex flex-wrap items-end justify-between gap-5"><div><p className="text-[11px] font-semibold uppercase tracking-[.22em] text-accent-deep">06 / Core concepts</p><h3 className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">Computer Science in the marketplace</h3></div><p className="max-w-md text-sm leading-relaxed text-ink-950/55">The prototype makes an everyday booking journey a practical way to discuss software engineering.</p></div></Reveal><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{concepts.map(([title, text], i) => <Reveal key={title} delay={i * 35}><div className="h-full rounded-2xl border border-ink-950/10 bg-warm-white p-5"><span className="font-mono text-[11px] text-accent-deep">0{i + 1}</span><h4 className="mt-3 font-semibold">{title}</h4><p className="mt-2 text-sm leading-relaxed text-ink-950/55">{text}</p></div></Reveal>)}</div></div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-2"><Reveal><div className="rounded-3xl border border-ink-950/10 bg-warm-white p-6 md:p-8"><p className="text-[11px] font-semibold uppercase tracking-[.22em] text-accent-deep">07 / Security</p><h3 className="mt-2 text-2xl font-semibold">Trust is designed in.</h3><p className="mt-4 text-sm leading-relaxed text-ink-950/55">A real platform would need strong identity, permissions and careful handling of personal information at every layer.</p><div className="mt-6 flex flex-wrap gap-2">{security.map((item) => <span key={item} className="rounded-full bg-paper px-3 py-2 text-xs text-ink-950/65">{item}</span>)}</div></div></Reveal><Reveal delay={100}><div id="future" className="rounded-3xl border border-accent/20 bg-accent-soft/45 p-6 md:p-8"><p className="text-[11px] font-semibold uppercase tracking-[.22em] text-accent-deep">08 / Future technology</p><h3 className="mt-2 text-2xl font-semibold">Possible future developments.</h3><p className="mt-4 text-sm leading-relaxed text-ink-950/60">These ideas describe future directions, not current capabilities of the prototype.</p><div className="mt-6 flex flex-wrap gap-2">{future.map((item) => <span key={item} className="rounded-full border border-ink-950/10 bg-warm-white/75 px-3 py-2 text-xs text-ink-950/65">{item}</span>)}</div></div></Reveal></div>
+
+        <Reveal><div className="mt-16 rounded-3xl bg-ink-950 p-6 text-paper shadow-lift md:p-10"><div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-[11px] uppercase tracking-[.22em] text-accent-2">09 / Request lifecycle</p><h3 className="mt-2 text-2xl font-semibold md:text-3xl">One request, seven connected stages.</h3></div><span className="rounded-full border border-paper/15 px-3 py-1 text-xs text-paper/55">select a stage</span></div><div className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-7">{workflowDetails.map(([title], i) => <button key={`${title}-${i}`} onClick={() => setActiveWorkflow(i)} className={`rounded-2xl border p-4 text-left transition ${activeWorkflow === i ? "border-accent bg-accent/15" : "border-paper/10 bg-paper/[.04] hover:border-paper/25"}`}><span className="font-mono text-xs text-accent-2">0{i + 1}</span><h4 className="mt-3 font-semibold">{title}</h4></button>)}</div><div className="mt-5 grid gap-5 lg:grid-cols-[.85fr_1.15fr]"><div className="rounded-2xl border border-paper/10 bg-paper/[.045] p-5"><p className="text-xs uppercase tracking-[.18em] text-accent-2">Stage {activeWorkflow + 1}</p><h4 className="mt-3 text-xl font-semibold">{workflowDetails[activeWorkflow][0]}</h4><p className="mt-3 text-sm leading-relaxed text-paper/60">{workflowDetails[activeWorkflow][1]}</p></div><pre className="overflow-x-auto rounded-2xl bg-[#111827] p-5 font-mono text-xs leading-7 text-accent-2">{workflowDetails[activeWorkflow][2]}</pre></div></div></Reveal>
+
+        <Reveal><div className="mt-16 grid gap-6 lg:grid-cols-[1.05fr_.95fr]"><div className="rounded-3xl border border-ink-950/10 bg-warm-white p-6 md:p-8"><p className="text-[11px] font-semibold uppercase tracking-[.22em] text-accent-deep">10 / Example records</p><h3 className="mt-2 text-2xl font-semibold">Tables become useful when they hold related records.</h3><p className="mt-4 text-sm leading-relaxed text-ink-950/55">Primary keys identify records, while foreign keys connect providers, listings, availability and bookings.</p><div className="mt-6 flex flex-col gap-2">{detailedTables.map(([name, fields, row]) => <div key={name} className="rounded-2xl bg-paper p-4"><div className="flex flex-wrap items-center justify-between gap-2"><span className="font-semibold">{name}</span><span className="font-mono text-[11px] text-accent-deep">{fields}</span></div><p className="mt-2 font-mono text-[11px] text-ink-950/50">{row}</p></div>)}</div></div><div className="rounded-3xl bg-ink-900 p-6 text-paper md:p-8"><p className="text-[11px] uppercase tracking-[.22em] text-accent-2">11 / Recommendation concept</p><h3 className="mt-2 text-2xl font-semibold">Ranking can turn preferences into useful results.</h3><p className="mt-4 text-sm leading-relaxed text-paper/60">A future recommendation system could combine signals such as location, capacity, budget and previous searches.</p><div className="mt-6 flex flex-wrap gap-2">{recommendationSignals.map((signal) => <button key={signal} onClick={() => setSelectedSignals((current) => current.includes(signal) ? current.filter((item) => item !== signal) : [...current, signal])} className={`rounded-full border px-3 py-2 text-xs transition ${selectedSignals.includes(signal) ? "border-accent bg-accent/20 text-paper" : "border-paper/15 text-paper/55 hover:border-paper/30"}`}>{signal}</button>)}</div><div className="mt-6 flex flex-col gap-3">{recommendationResults.map(([name, score], i) => <div key={name} className="rounded-2xl border border-paper/10 bg-paper/[.045] p-4"><div className="flex items-center justify-between text-sm"><span className="font-semibold">{name}</span><span className="font-mono text-accent-2">{selectedSignals.length ? (Number(score) * (selectedSignals.length / 4)).toFixed(2) : "0.00"}</span></div><div className="mt-3 h-1.5 overflow-hidden rounded-full bg-paper/10"><div className="h-full rounded-full bg-accent transition-all" style={{ width: `${selectedSignals.length ? Number(score) * (selectedSignals.length / 4) * 100 : 0}%` }} /></div></div>)}</div><p className="mt-5 text-xs text-paper/40">Illustrative scoring only; real weights would be learned from data.</p></div></div></Reveal>
       </div>
     </section>
   );
